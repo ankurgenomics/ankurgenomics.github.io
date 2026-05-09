@@ -1,0 +1,35 @@
+title: "Ankur Sharma, PhD"
+description: "Computational biologist and agentic AI engineer, Singapore. Building systems that connect genomic data to real-world decisions."
+url: "https://ankurgenomics.github.io"
+baseurl: ""
+
+author:
+  name: "Ankur Sharma, PhD"
+  email: ankurs103@gmail.com
+
+theme: minima
+
+minima:
+  skin: classic
+
+header_pages:
+  - about.md
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+social_links:
+  - { platform: github,   user_url: "https://github.com/ankurgenomics" }
+  - { platform: linkedin, user_url: "https://linkedin.com/in/ankurit" }
+
+permalink: /:year/:month/:day/:title.html
+
+markdown: kramdown
+highlighter: rouge
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - .git
