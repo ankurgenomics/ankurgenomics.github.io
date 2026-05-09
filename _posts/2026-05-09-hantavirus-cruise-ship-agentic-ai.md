@@ -16,8 +16,7 @@ excerpt: "On April 2026, MV Hondius returned from Patagonia carrying more than i
 > **TL;DR** -- Andes virus became the first hantavirus confirmed for human-to-human transmission.
 > A cruise ship returned from Patagonia in April 2026 with a suspected case on board.
 > I built `outbreak-agent` -- a 4-node LangGraph triage pipeline -- to show exactly how
-> an agentic AI system should handle this kind of event. The code is public. The clinical
-> scoring module is not. Here is why both decisions were deliberate.
+> an agentic AI system should handle this kind of event.
 
 ---
 
@@ -108,8 +107,51 @@ This is exactly the problem agentic AI should solve.
 
 ## 4. The outbreak-agent: Architecture and Design Decisions
 
-I built `outbreak-agent` as a public demonstration of how a LangGraph state machine
-can handle this triage problem. The full code is at
+Most outbreak surveillance tools are databases with search interfaces. You query them,
+they return data, a human decides what to do next. That loop takes 48–72 hours minimum.
+
+`outbreak-agent` is different. It is an automated decision pipeline -- you give it a
+case and it gives you a risk-stratified action, an audit trail, and a printed report.
+No human in the middle.
+
+You feed it the facts: a patient, their age, where they were exposed, which ship, which
+cabin, who they sat near, how many days since symptoms started, lab values, a genome
+sequence if available. The agent runs four steps automatically:
+
+- **Step 1 — Identify the virus.** The `genomic_node` determines the viral clade,
+  flags mutations of concern, and assesses genome completeness. For MV Hondius: Andes
+  virus, S-clade 2026, with a G2 glycoprotein shift that has direct structural
+  implications for aerosol transmission.
+
+- **Step 2 — Map the contacts.** The `linkage_node` resolves the full contact cluster --
+  not just the people the patient named, but inferred contacts based on vessel layout,
+  HVAC zones, and excursion groups. It also determines transmission mode: rodent-contact
+  only, or human-to-human aerosol.
+
+- **Step 3 — Score the risk.** The `risk_node` produces a composite score from 0 to 100
+  and assigns a tier: LOW / MEDIUM / HIGH / CRITICAL. For MV Hondius: 98/100, CRITICAL.
+  Action: immediate isolation, notify MoH within 2 hours, activate IPC team, contact-trace
+  all vessel passengers.
+
+- **Step 4 — Audit the output.** This is where it becomes an *agent* rather than a script.
+  The `critic_node` checks the entire output for internal contradictions before anything
+  reaches a decision-maker. If it finds that a CRITICAL tier was assigned with a low-risk
+  transmission mode, or that a confident clade was declared on a 40% complete genome, it
+  raises a flag and the graph loops back to re-evaluate. Up to 3 times. Only a consistent,
+  contradiction-free output gets approved.
+
+The result: a 3-panel risk dashboard (PNG) and a structured A4 PDF triage report,
+generated automatically on every run. No API key. No cost. Under 2 seconds.
+
+**Why LangGraph and not just Python functions?** LangGraph provides the graph engine --
+state management, node wiring, and the conditional edge that routes the critic's flag back
+to the genomic node for re-evaluation. The 4 nodes themselves are rule-based and
+deterministic; that is what makes 33 tests run free and fast. The architecture is
+deliberately designed so that replacing any rule-based node with a real LLM call requires
+changing one function -- not rewiring the graph. Deterministic and auditable today,
+upgradeable without structural changes tomorrow.
+
+The full code is at
 [github.com/ankurgenomics/outbreak-agent](https://github.com/ankurgenomics/outbreak-agent).
 
 ### Graph Topology
