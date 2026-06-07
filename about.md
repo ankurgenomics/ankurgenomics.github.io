@@ -17,8 +17,9 @@ precision diagnostics, and autonomous research pipelines.
 
 ### Current Projects
 
-- **outbreak-agent** -- LangGraph triage pipeline for infectious disease surveillance
-- **GenomicsCopilot** -- Agentic genomics platform for clinical decision support
+- **[Reviewer2](https://github.com/ankurgenomics/Reviewer2)** -- Autonomous ACMG/AMP variant second reviewer. 4-node LangGraph pipeline exposed as an MCP server. Evidence-grounded Pydantic enforcement: no criterion fires without a source sentence.
+- **[outbreak-agent](https://github.com/ankurgenomics/outbreak-agent)** -- LangGraph triage pipeline for infectious disease surveillance
+- **[GenomicsCopilot](https://github.com/ankurgenomics/agentic-genomics)** -- Agentic genomics platform for clinical decision support
 
 ### Contact
 
