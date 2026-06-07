@@ -12,6 +12,44 @@ Systems that connect genomic data to real-world decisions using agentic AI.
 
 ---
 
+## Reviewer2
+
+**Autonomous ACMG variant second reviewer -- LangGraph + FastMCP + MCP Server**
+
+[![GitHub](https://img.shields.io/badge/GitHub-Reviewer2-blue)](https://github.com/ankurgenomics/Reviewer2)
+[![Tests](https://img.shields.io/badge/tests-21%20passing-brightgreen)](https://github.com/ankurgenomics/Reviewer2/tree/main/tests)
+[![CI](https://github.com/ankurgenomics/Reviewer2/actions/workflows/ci.yml/badge.svg)](https://github.com/ankurgenomics/Reviewer2/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/ankurgenomics/Reviewer2/blob/main/LICENSE)
+
+Clinical variant classification uses a 28-criterion framework (ACMG/AMP 2015). Applying it consistently is hard -- trained analysts disagree on edge cases more than the field admits, and manual peer review does not scale. Reviewer2 automates the second review step.
+
+Give it a variant and a proposed classification. It fetches the relevant evidence, applies the ACMG criteria deterministically, and tells you exactly where its call differs from yours -- with the specific evidence sentence grounding every criterion it fires. If the evidence is not there, the criterion does not fire. That constraint is enforced at the Pydantic model level, not by convention.
+
+**Architecture:**
+- `normalise` -- parses variant input, resolves gene and consequence
+- `fetch_evidence` -- retrieves allele frequency, functional data, in-silico predictions via `EvidenceProvider` protocol (RAG-ready, swappable)
+- `score_acmg` -- applies ACMG 2015 criteria deterministically in pure Python (no LLM in the scoring loop)
+- `detect_conflicts` -- compares engine call to proposed call, gates on action band (act / monitor / do-not-act)
+
+**What makes it different:**
+- Pydantic v2 validators enforce evidence grounding at the model level -- the pipeline physically cannot fire a criterion without attaching evidence
+- LLM is provider-agnostic: Ollama locally, Anthropic / OpenAI / Gemini as drop-ins
+- Exposed as a FastMCP server so any agent that speaks Model Context Protocol can call it as a tool
+- Evaluation runs against expert-panel ClinVar classifications the engine never sees; out-of-scope cases reported honestly
+
+**Evaluation:** 86% action-band concordance on in-scope cases vs expert-panel ClinVar (ClinGen VCEP / 3-star)
+
+```bash
+git clone https://github.com/ankurgenomics/Reviewer2
+cd Reviewer2 && uv sync
+uv run reviewer2 demo                          # 3 live cases, no API key with Ollama
+uv run python -m reviewer2.mcp_server          # start MCP server on stdio
+```
+
+**Repo:** [github.com/ankurgenomics/Reviewer2](https://github.com/ankurgenomics/Reviewer2)
+
+---
+
 ## outbreak-agent
 
 **Infectious disease triage with LangGraph -- built around MV Hondius / ANDV 2026**
