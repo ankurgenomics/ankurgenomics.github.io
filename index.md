@@ -12,6 +12,9 @@ surveillance, precision diagnostics, and autonomous research pipelines.
 
 ### Projects
 
+**[Reviewer2](https://github.com/ankurgenomics/Reviewer2)**
+Autonomous second reviewer for germline ACMG/AMP variant classification. A 4-node LangGraph pipeline that independently re-derives the ACMG call from evidence and flags disagreements with the human call. Every criterion is grounded in evidence or it does not fire. Exposed as an MCP server. 21 tests, 86% action-band concordance vs expert-panel ClinVar classifications.
+
 **[outbreak-agent](https://github.com/ankurgenomics/outbreak-agent)**
 A 4-node LangGraph triage pipeline for infectious disease outbreaks. Built around the
 April 2026 MV Hondius / Andes virus event. Generates a risk dashboard (PNG) and
