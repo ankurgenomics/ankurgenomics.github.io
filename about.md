@@ -4,22 +4,26 @@ title: About
 permalink: /about/
 ---
 
-**Ankur Sharma, PhD** -- Computational biologist and agentic AI engineer, Singapore.
+**Ankur Sharma, PhD** — Computational biologist and agentic AI engineer, Singapore.
 
 I build systems that connect genomic data to real-world decisions: outbreak surveillance,
 precision diagnostics, and autonomous research pipelines.
 
+Full portfolio: [ankurgenomics.github.io/agentic-genomics/](https://ankurgenomics.github.io/agentic-genomics/)
+
 ### Background
 
-- PhD in computational biology / bioinformatics
-- 10+ years building genomic data pipelines in clinical and research settings
+- PhD in computational biology / bioinformatics, NTU Singapore
+- 8+ years building production ML and genomic data pipelines in clinical and research settings
 - Current focus: agentic AI systems for high-stakes biological decisions
 
-### Current Projects
+### Projects
 
-- **[Reviewer2](https://github.com/ankurgenomics/Reviewer2)** -- Autonomous ACMG/AMP variant second reviewer. 4-node LangGraph pipeline exposed as an MCP server. Evidence-grounded Pydantic enforcement: no criterion fires without a source sentence.
-- **[outbreak-agent](https://github.com/ankurgenomics/outbreak-agent)** -- LangGraph triage pipeline for infectious disease surveillance
-- **[GenomicsCopilot](https://github.com/ankurgenomics/agentic-genomics)** -- Agentic genomics platform for clinical decision support
+- **[Reviewer2](https://github.com/ankurgenomics/Reviewer2)** — Autonomous ACMG/AMP variant second reviewer. 4-node LangGraph pipeline exposed as an MCP server. 21 tests, 86% action-band concordance vs expert-panel ClinVar.
+- **[sentinel-amr](https://github.com/ankurgenomics/sentinel-amr)** — Explainable AMR classifier for bacterial surveillance. XGBoost + SHAP + LangGraph. ROC-AUC 0.894 on a group-aware holdout. Detects novel organisms and escalates before trusting the model.
+- **[outbreak-agent](https://github.com/ankurgenomics/outbreak-agent)** — LangGraph triage pipeline for infectious disease surveillance. 33 tests, no API key required.
+- **[agentic-genomics](https://github.com/ankurgenomics/agentic-genomics)** — Reasoning-traceable variant interpretation agent. VCF + HPO → ranked ACMG candidates with full audit trail.
+- **[genomics-skills](https://github.com/ankurgenomics/genomics-skills)** — 8 agent-callable genomics tools: TCGA expression, survival, enrichment, PubMed, protein mapping.
 
 ### Contact
 
