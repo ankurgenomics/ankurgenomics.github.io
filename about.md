@@ -25,6 +25,12 @@ Full portfolio: [ankurgenomics.github.io/agentic-genomics/](https://ankurgenomic
 - **[agentic-genomics](https://github.com/ankurgenomics/agentic-genomics)** — Reasoning-traceable variant interpretation agent. VCF + HPO → ranked ACMG candidates with full audit trail.
 - **[genomics-skills](https://github.com/ankurgenomics/genomics-skills)** — 8 agent-callable genomics tools: TCGA expression, survival, enrichment, PubMed, protein mapping.
 
+### Writing
+
+- **[Using serverless for cross-organizations information exchange in genomic analysis](https://builder.aws.com/content/2yRrRdqamrcHxXj2oF1nJgtXoTU/using-serverless-for-cross-organizations-information-exchange-in-genomic-analysis)** · AWS Builder Center · 2025
+- **[When an AI Agent Boards a Cruise Ship](https://ankurgenomics.github.io/2026/05/09/hantavirus-cruise-ship-agentic-ai.html)** · Blog · May 2026
+- **[Why agentic AI for genomics?](https://github.com/ankurgenomics/agentic-genomics/blob/main/docs/why-agentic.md)** · Technical writeup · Open source
+
 ### Contact
 
 - LinkedIn: [linkedin.com/in/ankurit](https://linkedin.com/in/ankurit)
